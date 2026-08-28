@@ -1,39 +1,30 @@
 import type { Metadata } from "next";
-import { headers } from "next/headers";
 import "./globals.css";
 
-async function requestOrigin() {
-  const incomingHeaders = await headers();
-  const host = incomingHeaders.get("x-forwarded-host") ?? incomingHeaders.get("host") ?? "localhost:3000";
-  const protocol = incomingHeaders.get("x-forwarded-proto") ?? (host.includes("localhost") ? "http" : "https");
-  return `${protocol}://${host}`;
-}
+const siteOrigin = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+const title = "LANGII | Engine Components";
+const description = "Browse LANGII engine blocks, cylinder heads, head assemblies, and crankshafts by engine family or reference number.";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const origin = await requestOrigin();
-  const title = "V8 Engine Blocks & Engine Components | V8 Blocks";
-  const description = "Explore V8 cylinder block families and supporting engine components for United States and Australian specification-led inquiries.";
-  return {
-    metadataBase: new URL(origin),
+export const metadata: Metadata = {
+  metadataBase: new URL(siteOrigin),
+  title,
+  description,
+  applicationName: "LANGII",
+  icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
+  openGraph: {
     title,
     description,
-    applicationName: "V8 Blocks",
-    icons: { icon: "/og.png", shortcut: "/og.png" },
-    openGraph: {
-      title,
-      description,
-      type: "website",
-      url: origin,
-      images: [{ url: `${origin}/og.png`, width: 1731, height: 909, alt: "V8 Blocks — specification-led engine components for the United States and Australia" }],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [`${origin}/og.png`],
-    },
-  };
-}
+    type: "website",
+    url: siteOrigin,
+    images: [{ url: `${siteOrigin}/og-v2.png`, width: 1536, height: 1024, alt: "LANGII engine components" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: [`${siteOrigin}/og-v2.png`],
+  },
+};
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (

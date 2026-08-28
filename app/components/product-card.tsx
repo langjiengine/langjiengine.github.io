@@ -1,20 +1,30 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
-import type { V8Product } from "../data/products";
+import type { CatalogProduct } from "../data/products";
 
-export function ProductCard({ product, index }: { product: V8Product; index: number }) {
+export function ProductCard({ product }: { product: CatalogProduct }) {
+  const image = product.cardImage ?? product.images[0];
+  const firstReference = product.partNumbers[0] ?? product.id;
+
   return (
     <article className="product-card">
-      <Link className="product-image" href={`/products/${product.slug}`}>
-        <span>{String(index + 1).padStart(2, "0")}</span>
-        <img src={product.images[0]} alt={`${product.name} production view`} />
+      <Link className={`product-image${product.cardImage ? " product-image-cutout" : ""}`} href={`/products/${product.slug}`}>
+        {image ? (
+          <img src={image} alt={`${product.name} product view`} />
+        ) : (
+          <span className="image-missing">Image pending</span>
+        )}
       </Link>
       <div className="product-card-body">
-        <p>{product.family}</p>
+        <p className="product-reference">{product.family} · {firstReference}</p>
         <h3><Link href={`/products/${product.slug}`}>{product.name}</Link></h3>
-        <dl><dt>Bore</dt><dd>{product.bore}</dd></dl>
-        <Link href={`/products/${product.slug}`} aria-label={`View details for ${product.name}`}>
-          View block details <span aria-hidden="true">↗</span>
+        <p className="product-card-summary">{product.summary}</p>
+        <dl>
+          <div><dt>Category</dt><dd>{product.category}</dd></div>
+          <div><dt>Pricing</dt><dd>{product.priceLabel}</dd></div>
+        </dl>
+        <Link className="product-detail-link" href={`/products/${product.slug}`} aria-label={`View specifications for ${product.name}`}>
+          View specifications <span aria-hidden="true">→</span>
         </Link>
       </div>
     </article>

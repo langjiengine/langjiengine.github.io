@@ -1,14 +1,14 @@
-# V8 Blocks Product Showcase — MVP
+# LANGII Product Showcase — First Version
 
-An English, specification-led engine component showcase for United States and Australian buyers. V8 cylinder blocks are the flagship range; diesel and heavy-duty engine components are presented as a supporting catalog.
+An English B2B product catalog for engine-component buyers. V8 engine blocks are shown first; cylinder blocks, cylinder heads, head assemblies, and crankshafts follow as supporting products.
 
 ## Outline
 
 1. Run and verify the site
-2. Review the implemented product experience
-3. Replace launch placeholders
-4. Approve source-data corrections
-5. Extend the catalog after MVP approval
+2. Review the implemented catalog
+3. Maintain product data
+4. Replace launch placeholders
+5. Publish or migrate the site
 
 ## Run locally
 
@@ -24,46 +24,59 @@ Open `http://localhost:3000`.
 Verification:
 
 ```bash
-npm run build
 npm run lint
+npm run build
 node --test tests/rendered-html.test.mjs
 ```
 
-## Implemented in this MVP
+## Implemented
 
-- Responsive industrial English homepage
-- Searchable and filterable product catalog
-- Nine V8 cylinder-block detail routes
-- Sixty source-supplied V8 product images
-- Supporting catalog overview covering 61 source records
-- Product gallery, source-backed specification table, and related products
-- Quote-request form that prepares an email locally
-- Per-product titles, descriptions, canonical URLs, Open Graph/X metadata, Product JSON-LD, breadcrumbs, sitemap, and robots directives
-- Social-sharing card for the US/Australian market positioning
+- Minimal LANGII visual identity and buyer-focused English copy
+- VPW-inspired left-side category navigation
+- One-image, one-description, and pricing-status product cards
+- Uniform 4:3 landscape image frames with proportional `contain` scaling
+- 10 featured V8 block records, including the supplemental LS3 product
+- 61 supporting spreadsheet records with 58 mapped source images
+- Search by product name, engine family, category, catalog reference, and part number
+- A maintained detail route for every one of the 71 listed records
+- Product galleries, specification tables, confirmation notices, related products, metadata, JSON-LD, sitemap, and robots controls
+- Inquiry form with product context; no login, database, checkout, ERP, WMS, inventory, or payment dependency
+- Small LANGII social-sharing treatment and one temporary true-alpha LS3 cutout
 
 ## Product-data rules
 
-- No price, stock, fitment, certification, material, or machining claim is published without source evidence.
-- `GM302/351C` is shown as a source conflict and requires confirmation.
-- `LS400` requires exact engine-family confirmation.
-- Bore values appear only where the V8 source file provides them.
-- The supporting range is grouped by brand in this MVP; individual record pages are a next-phase migration.
+- Do not invent price ranges. Display `Price on request` until approved commercial data is supplied.
+- Do not infer the workbook's weight or dimension units. The original values remain visible with a confirmation warning.
+- Keep source photos unchanged on detail pages. AI-assisted cutouts are optional temporary listing assets only.
+- Preserve unresolved source conflicts as explicit confirmation notices.
+- Confirm fitment against engine family and part number before quotation.
 
-## Required before public launch
+## Data locations
 
-- Final company name, logo, domain, business email, phone, and addresses
-- Approved quotation recipient in place of `sales@example.com`
-- Final legal, privacy, warranty, shipping, and returns copy
-- Confirmation of the two ambiguous V8 records
-- Units for weight and dimensions in the supporting spreadsheet
-- Approved markets, Incoterms, MOQ, lead-time language, and certifications
+- V8 catalog: `app/data/products.ts`
+- Supporting catalog: `app/data/supporting-products.json`
+- V8 source images: `public/products/v8/`
+- Supporting source images: `public/products/support/`
+- Temporary transparent cutout: `public/products/cutouts/ls3-v2.png`
+- Social-sharing cover: `public/og-v2.png`
+
+## Required before public sales use
+
+- Official company descriptor or tagline
+- Public sales email, phone/WhatsApp, and business address
+- Approved price ranges or a decision to keep quote-only pricing
+- MOQ, lead time, Incoterms, currency, warranty, and quality/certification statements
+- Confirmed units for spreadsheet weight and dimensions
+- Missing images for SUP-016, SUP-046, and SUP-052
+- Confirmation of LS400 and Ford 6.0L/6.4L specifications
+- Resolution of the GM 454 4.277 rear-main-seal source conflict
+- Privacy, warranty, shipping, and returns language if the site later collects data or sells online
 
 ## Architecture
 
 - Vinext / React / TypeScript
-- Cloudflare-compatible Sites runtime
-- Data-first product records in `app/data/products.ts`
-- Static source photography in `public/products/v8/`
-- No database, ERP, inventory, checkout, or payment dependency for this showcase MVP
+- Data-first static product records
+- Cloudflare-compatible runtime for the current first version
+- Portable content and images for later migration to GitHub Pages, another static host, or the final custom domain
 
-The full phased roadmap and source audit are in `outputs/README_Product_Showcase_Technical_Roadmap.md`.
+The current detailed roadmap is in `outputs/README_LANGII_Technical_Roadmap_v2.md`.

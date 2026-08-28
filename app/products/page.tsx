@@ -4,23 +4,27 @@ import { SiteFooter } from "../components/site-footer";
 import { SiteHeader } from "../components/site-header";
 
 export const metadata: Metadata = {
-  title: "Engine Component Catalog | V8 Blocks",
-  description: "Search nine V8 cylinder block groups and a supporting range of 61 engine component records for US and Australian inquiries.",
+  title: "Product Catalog | LANGII",
+  description: "Search LANGII engine blocks, cylinder heads, head assemblies, and crankshafts by engine family or reference number.",
 };
 
 export default function ProductsPage() {
   return (
     <main>
       <SiteHeader />
-      <section className="page-hero catalog-page-hero">
-        <p className="eyebrow">Product catalog</p>
-        <h1>Find the family.<br /><em>Then confirm the build.</em></h1>
-        <p>V8 blocks lead this catalog. Supporting diesel and heavy-duty components remain searchable by brand and engine family.</p>
+      <section className="catalog-hero catalog-page-hero">
+        <div>
+          <p className="eyebrow">Product catalog</p>
+          <h1>Engine components.<br /><em>Clearly specified.</em></h1>
+        </div>
+        <div className="catalog-hero-copy">
+          <p>Use the left-side categories to narrow the catalog, or search by engine family and part number. Each card opens a maintained specification page.</p>
+        </div>
       </section>
       <CatalogExplorer />
       <section className="catalog-disclaimer">
         <strong>Specification notice</strong>
-        <p>Source labels are preserved for traceability. Fitment, material, machining state, package dimensions, and final part-number compatibility must be confirmed before an order is placed.</p>
+        <p>Source labels are retained for traceability. Final fitment, material, machining state, package dimensions, availability, and compatible part numbers must be confirmed before ordering.</p>
       </section>
       <SiteFooter />
     </main>

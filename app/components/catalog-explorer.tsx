@@ -2,102 +2,141 @@
 
 import { useMemo, useState } from "react";
 import { ProductCard } from "./product-card";
-import { supportingRanges, v8Products } from "../data/products";
+import {
+  allProducts,
+  catalogCategories,
+  getCategoryCount,
+  supportingProducts,
+  v8Products,
+} from "../data/products";
 
-type View = "v8" | "support";
+type Category = (typeof catalogCategories)[number];
+
+function matchesProduct(product: (typeof allProducts)[number], query: string, brand: string, category: Category) {
+  const matchesCategory = category === "All products" || product.category === category;
+  const matchesBrand = brand === "All families" || product.applicationBrand === brand;
+  const haystack = [
+    product.id,
+    product.name,
+    product.family,
+    product.applicationBrand,
+    product.category,
+    product.partNumbers.join(" "),
+    product.specifications.map((item) => `${item.label} ${item.value}`).join(" "),
+  ].join(" ").toLowerCase();
+  return matchesCategory && matchesBrand && (!query || haystack.includes(query));
+}
 
 export function CatalogExplorer() {
-  const [view, setView] = useState<View>("v8");
   const [query, setQuery] = useState("");
-  const [brand, setBrand] = useState("All brands");
+  const [brand, setBrand] = useState("All families");
+  const [category, setCategory] = useState<Category>("All products");
 
-  const filteredV8 = useMemo(() => {
-    const needle = query.trim().toLowerCase();
-    return v8Products.filter((product) => {
-      const matchesBrand = brand === "All brands" || product.brand === brand;
-      const haystack = `${product.name} ${product.family} ${product.sourceLabel} ${product.bore}`.toLowerCase();
-      return matchesBrand && (!needle || haystack.includes(needle));
-    });
-  }, [brand, query]);
+  const brands = useMemo(() => [
+    "All families",
+    ...Array.from(new Set(allProducts.map((product) => product.applicationBrand))).sort(),
+  ], []);
 
-  const filteredSupport = useMemo(() => {
-    const needle = query.trim().toLowerCase();
-    return supportingRanges.filter((range) => {
-      const matchesBrand = brand === "All brands" || range.brand === brand;
-      const haystack = `${range.brand} ${range.focus} ${range.examples.join(" ")}`.toLowerCase();
-      return matchesBrand && (!needle || haystack.includes(needle));
-    });
-  }, [brand, query]);
+  const normalizedQuery = query.trim().toLowerCase();
+  const filteredV8 = v8Products.filter((product) => matchesProduct(product, normalizedQuery, brand, category));
+  const filteredSupport = supportingProducts.filter((product) => matchesProduct(product, normalizedQuery, brand, category));
+  const resultCount = filteredV8.length + filteredSupport.length;
 
-  const brands = view === "v8"
-    ? ["All brands", "Ford", "GM", "Brand to confirm"]
-    : ["All brands", ...supportingRanges.map((range) => range.brand)];
-  const resultCount = view === "v8" ? filteredV8.length : filteredSupport.length;
-
-  function changeView(nextView: View) {
-    setView(nextView);
-    setBrand("All brands");
+  function clearFilters() {
     setQuery("");
+    setBrand("All families");
+    setCategory("All products");
   }
 
   return (
-    <>
-      <div className="catalog-toolbar">
-        <div className="catalog-tabs" aria-label="Catalog range">
-          <button className={view === "v8" ? "is-active" : ""} onClick={() => changeView("v8")} type="button">
-            V8 blocks <span>09</span>
-          </button>
-          <button className={view === "support" ? "is-active" : ""} onClick={() => changeView("support")} type="button">
-            Supporting range <span>61</span>
-          </button>
+    <section className="catalog-shell" aria-label="Product catalog">
+      <aside className="catalog-sidebar">
+        <div className="sidebar-heading">
+          <span>Browse products</span>
+          <strong>{allProducts.length} records</strong>
         </div>
-        <label className="catalog-search">
-          <span>Search product, family, or source label</span>
-          <input
-            type="search"
-            placeholder={view === "v8" ? "Try GM 454 or 4.496" : "Try C15 or cylinder head"}
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-          />
-        </label>
-        <label className="catalog-select">
-          <span>Brand</span>
-          <select value={brand} onChange={(event) => setBrand(event.target.value)}>
-            {brands.map((item) => <option key={item}>{item}</option>)}
-          </select>
-        </label>
-      </div>
-
-      <div className="catalog-results-bar">
-        <strong>{resultCount}</strong> {view === "v8" ? "product groups" : "brand ranges"} shown
-      </div>
-
-      {view === "v8" ? (
-        <section className="product-grid catalog-product-grid" aria-live="polite">
-          {filteredV8.map((product, index) => (
-            <ProductCard product={product} index={index} key={product.slug} />
+        <nav aria-label="Product categories">
+          {catalogCategories.map((item) => (
+            <button
+              className={category === item ? "is-active" : ""}
+              key={item}
+              onClick={() => setCategory(item)}
+              type="button"
+            >
+              <span>{item}</span>
+              <small>{String(getCategoryCount(item)).padStart(2, "0")}</small>
+            </button>
           ))}
-        </section>
-      ) : (
-        <section className="support-grid catalog-support-grid" aria-live="polite">
-          {filteredSupport.map((range) => (
-            <article className="support-card support-card-large" key={range.brand}>
-              <span>{String(range.count).padStart(2, "0")} records</span>
-              <h3>{range.brand}</h3>
-              <p>{range.focus}</p>
-              <small>{range.examples.join(" · ")}</small>
-              <a href={`/request-a-quote?product=${encodeURIComponent(`${range.brand} supporting range`)}`}>Ask about this range →</a>
-            </article>
-          ))}
-        </section>
-      )}
-
-      {resultCount === 0 && (
-        <div className="empty-state">
-          <p>No matching catalog records.</p>
-          <button type="button" onClick={() => { setQuery(""); setBrand("All brands"); }}>Clear filters</button>
+        </nav>
+        <div className="sidebar-note">
+          <strong>Buyer checklist</strong>
+          <p>Send the engine family, reference number, quantity, machining state, and application.</p>
         </div>
-      )}
-    </>
+      </aside>
+
+      <div className="catalog-main">
+        <div className="catalog-toolbar">
+          <label className="catalog-search">
+            <span>Search name, engine family, or part number</span>
+            <input
+              type="search"
+              placeholder="Example: LS3, C15, 19170538"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+            />
+          </label>
+          <label className="catalog-select">
+            <span>Engine / application family</span>
+            <select value={brand} onChange={(event) => setBrand(event.target.value)}>
+              {brands.map((item) => <option key={item}>{item}</option>)}
+            </select>
+          </label>
+        </div>
+
+        <div className="catalog-results-bar">
+          <span><strong>{resultCount}</strong> products shown</span>
+          {(query || brand !== "All families" || category !== "All products") && (
+            <button type="button" onClick={clearFilters}>Clear filters</button>
+          )}
+        </div>
+
+        {filteredV8.length > 0 && (
+          <section className="catalog-group" id="featured-v8">
+            <div className="catalog-group-heading">
+              <div>
+                <p className="eyebrow">Priority range</p>
+                <h2>V8 engine blocks</h2>
+              </div>
+              <p>Key specifications are visible on each detail page. Pricing is confirmed against quantity and machining requirements.</p>
+            </div>
+            <div className="product-grid catalog-product-grid">
+              {filteredV8.map((product) => <ProductCard product={product} key={product.slug} />)}
+            </div>
+          </section>
+        )}
+
+        {filteredSupport.length > 0 && (
+          <section className="catalog-group catalog-support-group" id="other-components">
+            <div className="catalog-group-heading">
+              <div>
+                <p className="eyebrow">Other components</p>
+                <h2>Heads, blocks &amp; crankshafts</h2>
+              </div>
+              <p>Every supplied catalog record has its own page, part-number field, source dimensions, and inquiry link.</p>
+            </div>
+            <div className="product-grid catalog-product-grid support-product-grid">
+              {filteredSupport.map((product) => <ProductCard product={product} key={product.slug} />)}
+            </div>
+          </section>
+        )}
+
+        {resultCount === 0 && (
+          <div className="empty-state">
+            <p>No matching catalog records.</p>
+            <button type="button" onClick={clearFilters}>Clear filters</button>
+          </div>
+        )}
+      </div>
+    </section>
   );
 }
