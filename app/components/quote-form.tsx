@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { LANGII_CONTACT } from "../data/contact";
 
 export function QuoteForm({ initialProduct = "" }: { initialProduct?: string }) {
   const [notice, setNotice] = useState("");
@@ -31,8 +32,8 @@ export function QuoteForm({ initialProduct = "" }: { initialProduct?: string }) 
       document.execCommand("copy");
       textArea.remove();
     }
-    setNotice("Inquiry brief copied. Your email application is opening with the subject and message filled in.");
-    window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(brief)}`;
+    setNotice(`Inquiry brief copied. Your email application is opening a message to ${LANGII_CONTACT.email}.`);
+    window.location.href = `mailto:${LANGII_CONTACT.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(brief)}`;
   }
 
   return (
@@ -49,7 +50,7 @@ export function QuoteForm({ initialProduct = "" }: { initialProduct?: string }) 
       </div>
       <div className="form-submit-row">
         <button className="button button-primary" type="submit">Open email application</button>
-        <small>The inquiry is copied as a backup, then opened in your email application. Choose your LANGII contact before sending.</small>
+        <small>The inquiry is copied as a backup, then opened in your email application addressed to LANGII sales.</small>
       </div>
       {notice && <p className="form-notice" role="status">{notice}</p>}
     </form>

@@ -53,6 +53,8 @@ test("renders the inquiry route with the selected product", async () => {
   assert.match(html, /Open email application/i);
   assert.match(html, /LS3 Aluminum 6\.2L/i);
   assert.match(html, /Delivery country \/ region/i);
+  assert.match(html, /jane@langjitech\.com/i);
+  assert.match(html, /wa\.me\/8613757409660/i);
   assert.doesNotMatch(html, /sales@langii\.example|intentional placeholder|sales contact pending/i);
   assert.doesNotMatch(html, /Select market|United States|Australia/i);
 });

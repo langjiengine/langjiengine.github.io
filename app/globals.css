@@ -363,6 +363,11 @@ button { color: inherit; }
 .quote-page-intro dt { color: #ff8d6b; font-size: .68rem; font-weight: 900; }
 .quote-page-intro dd { color: #e4e6e2; font-size: .85rem; margin: 0; }
 .inquiry-helper { background: #282c29; border-left: 3px solid #f0c66a; color: #d7dad6; font-size: .78rem; line-height: 1.55; padding: 1rem; }
+.direct-contacts { border-top: 1px solid #3d423e; display: grid; margin-top: 1rem; }
+.direct-contacts a { border-bottom: 1px solid #3d423e; display: grid; gap: .3rem; padding: .85rem 0; }
+.direct-contacts a:hover strong { color: #f0c66a; }
+.direct-contacts span { color: #929891; font-size: .58rem; font-weight: 900; letter-spacing: .09em; text-transform: uppercase; }
+.direct-contacts strong { color: white; font-size: .82rem; overflow-wrap: anywhere; }
 .quote-form-shell { padding: 6vw 4vw; }
 .quote-form-shell h2 { font-size: 2rem; margin: 0 0 1.7rem; }
 .form-grid { display: grid; gap: 1rem; grid-template-columns: 1fr 1fr; }
@@ -380,6 +385,9 @@ footer { align-items: start; background: var(--ink); color: white; display: grid
 .brand-lockup-footer small { color: #aeb3ad; }
 footer p { color: #d0d3ce; font-size: .82rem; line-height: 1.5; margin: 0; }
 footer small { color: #858b85; line-height: 1.5; }
+.footer-contact { display: grid; gap: .55rem; }
+.footer-contact a { color: #d0d3ce; font-size: .75rem; overflow-wrap: anywhere; }
+.footer-contact a:hover { color: #f0c66a; }
 
 @media (max-width: 1100px) {
   .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
