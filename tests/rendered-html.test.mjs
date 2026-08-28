@@ -31,7 +31,8 @@ for (const [slug, title, detail] of [
   ["ford-351w", "351W Small-Block V8 Cylinder Block", "9.500 in"],
   ["ls3-aluminum-6-2l", "LS3 Aluminum 6.2L V8 Cylinder Block", "12621766"],
   ["01-cummins-isx15-single-overhead-camshaft-cylinder-head", "Cummins ISX15 Single Overhead Camshaft Cylinder Head", "4298236"],
-  ["16-cummins-isde4-5-cylinder-block", "Cummins ISDE4.5 Cylinder Block", "Product image pending"],
+  ["16-cummins-isde4-5-cylinder-block", "Cummins ISDE4.5 Cylinder Block", "16-cummins-isde4-5.png"],
+  ["46-caterpillar-c7-cylinder-head-assembly", "Caterpillar C7 Cylinder Head Assembly", "46-caterpillar-c7.png"],
 ]) {
   test(`renders maintained product details for ${slug}`, async () => {
     const response = await request(`/products/${slug}`);

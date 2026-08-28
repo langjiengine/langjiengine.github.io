@@ -77,7 +77,7 @@ This creates a fully static catalog in `dist/client`, including all product-deta
 - Approved price ranges or a decision to keep quote-only pricing
 - MOQ, lead time, Incoterms, currency, warranty, and quality/certification statements
 - Confirmed units for spreadsheet weight and dimensions
-- Missing images for SUP-016, SUP-046, and SUP-052
+- Missing image for SUP-052
 - Confirmation of LS400 and Ford 6.0L/6.4L specifications
 - Resolution of the GM 454 4.277 rear-main-seal source conflict
 - Privacy, warranty, shipping, and returns language if the site later collects data or sells online
