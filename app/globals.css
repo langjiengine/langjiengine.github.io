@@ -13,7 +13,7 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 90px; }
 body {
   background: var(--paper);
   color: var(--ink);
@@ -171,7 +171,6 @@ button { color: inherit; }
   border-bottom: 1px solid var(--line);
   display: grid;
   grid-template-columns: 260px minmax(0, 1fr);
-  scroll-margin-top: 78px;
 }
 .catalog-sidebar { border-right: 1px solid var(--line); padding: 2rem 1.25rem 4rem 4vw; }
 .catalog-sidebar > * { position: sticky; top: 98px; }
@@ -242,7 +241,6 @@ button { color: inherit; }
 .catalog-results-bar strong { color: var(--ink); font-size: 1rem; }
 .catalog-results-bar button { background: transparent; border: 0; color: var(--accent); cursor: pointer; font-size: .68rem; font-weight: 900; text-transform: uppercase; }
 
-.catalog-group { scroll-margin-top: 90px; }
 .catalog-group + .catalog-group { border-top: 5px solid var(--ink); }
 .catalog-group-heading {
   align-items: end;
@@ -295,7 +293,7 @@ button { color: inherit; }
 .product-detail-link:hover { color: var(--accent); }
 .empty-state { padding: 5rem 2.5vw; text-align: center; }
 .empty-state button { background: var(--ink); border: 0; color: white; cursor: pointer; margin-top: 1rem; padding: .8rem 1rem; }
-.manufacturing-section { padding: 6rem 4vw; scroll-margin-top: 78px; }
+.manufacturing-section { padding: 6rem 4vw; }
 .manufacturing-heading { align-items: end; display: grid; gap: 4vw; grid-template-columns: 1.15fr .85fr; margin-bottom: 2rem; }
 .manufacturing-heading h2 { font-size: clamp(2.4rem, 4vw, 4.8rem); letter-spacing: -.055em; line-height: .96; margin: 0; max-width: 52rem; }
 .manufacturing-heading > p { color: var(--muted); line-height: 1.7; margin: 0; max-width: 38rem; }
@@ -370,7 +368,7 @@ button { color: inherit; }
 .direct-contacts a:hover strong, .direct-contact-email:hover strong { color: #f0c66a; }
 .direct-contacts span { color: #929891; font-size: .58rem; font-weight: 900; letter-spacing: .09em; text-transform: uppercase; }
 .direct-contacts strong { color: white; font-size: .82rem; overflow-wrap: anywhere; }
-.quote-form-shell { padding: 6vw 4vw; scroll-margin-top: 78px; }
+.quote-form-shell { padding: 6vw 4vw; }
 .quote-form-shell h2 { font-size: 2rem; margin: 0 0 1.7rem; }
 .form-grid { display: grid; gap: 1rem; grid-template-columns: 1fr 1fr; }
 .quote-form textarea { line-height: 1.5; resize: vertical; }
@@ -395,6 +393,7 @@ button { color: inherit; }
   background: white;
   border-top: 5px solid var(--accent);
   box-shadow: 0 30px 80px rgba(0, 0, 0, .28);
+  color: var(--ink);
   max-height: calc(100vh - 2rem);
   max-width: 560px;
   overflow-y: auto;
@@ -405,16 +404,17 @@ button { color: inherit; }
 .email-dialog .eyebrow { margin-bottom: .75rem; }
 .email-dialog h2 { font-size: clamp(1.8rem, 4vw, 2.7rem); letter-spacing: -.045em; line-height: 1; margin: 0; max-width: 26rem; }
 .email-dialog-intro { color: var(--muted); font-size: .86rem; line-height: 1.65; margin: 1rem 0 1.4rem; }
-.email-dialog-close { align-items: center; background: white; border: 1px solid var(--ink); cursor: pointer; display: inline-flex; font-size: .62rem; font-weight: 900; gap: .45rem; letter-spacing: .08em; padding: .48rem .65rem; position: absolute; right: 1rem; text-transform: uppercase; top: 1rem; }
-.email-dialog-close span:last-child { font-size: 1rem; line-height: .7; }
+.email-dialog-close { align-items: center; background: white; border: 1px solid var(--ink); color: var(--ink); cursor: pointer; display: inline-flex; height: 34px; justify-content: center; padding: 0; position: absolute; right: 1rem; top: 1rem; width: 34px; }
+.email-dialog-close span { font-size: 1.35rem; line-height: 1; }
 .email-address-card { background: var(--surface); border: 1px solid var(--line); display: grid; gap: .45rem; padding: 1.1rem; }
 .email-address-card span { color: var(--muted); font-size: .58rem; font-weight: 900; letter-spacing: .09em; text-transform: uppercase; }
-.email-address-card strong { font-size: 1.05rem; overflow-wrap: anywhere; }
+.email-address-card strong { color: var(--ink); font-size: 1.05rem; overflow-wrap: anywhere; }
 .email-address-card button { background: transparent; border: 0; color: var(--accent-dark); cursor: pointer; font-size: .66rem; font-weight: 900; justify-self: start; letter-spacing: .07em; padding: .25rem 0; text-transform: uppercase; }
 .email-dialog-actions { display: grid; gap: .65rem; grid-template-columns: 1fr 1fr; margin-top: 1rem; }
 .email-dialog-actions .button { width: 100%; }
+.email-dialog-actions .button-secondary { color: var(--ink); }
 .email-app-link { color: var(--muted); font-size: .69rem; font-weight: 900; grid-column: 1 / -1; justify-self: center; letter-spacing: .06em; padding: .55rem; text-decoration: underline; text-underline-offset: .2rem; text-transform: uppercase; }
-.email-dialog-dismiss { background: var(--surface); border: 1px solid var(--line); cursor: pointer; font-size: .65rem; font-weight: 900; grid-column: 1 / -1; letter-spacing: .07em; min-height: 42px; text-transform: uppercase; }
+.email-dialog-dismiss { background: var(--surface); border: 1px solid var(--line); color: var(--ink); cursor: pointer; font-size: .65rem; font-weight: 900; grid-column: 1 / -1; letter-spacing: .07em; min-height: 42px; text-transform: uppercase; }
 .email-dialog-note { background: #e7f0e6; border-left: 3px solid #4c7a49; color: #31582f; font-size: .75rem; line-height: 1.55; margin: 1rem 0 0; padding: .85rem; }
 
 footer { align-items: start; background: var(--ink); color: white; display: grid; gap: 2rem; grid-template-columns: 1fr 1.2fr 1fr; padding: 3rem 4vw; }

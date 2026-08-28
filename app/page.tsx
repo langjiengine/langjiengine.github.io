@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import Link from "next/link";
+/* eslint-disable @next/next/no-html-link-for-pages -- native navigation keeps hash targets reliable on static hosting */
 import { CatalogExplorer } from "./components/catalog-explorer";
 import { SiteFooter } from "./components/site-footer";
 import { SiteHeader } from "./components/site-header";
@@ -14,8 +14,8 @@ export default function Home() {
           <h1>Engine components, <em>clearly specified.</em></h1>
           <p>LANGII presents V8 and heavy-duty engine components for professional sourcing. Compare engine family, reference numbers and technical details before preparing an inquiry.</p>
           <div className="hero-actions">
-            <Link className="button button-primary" href="#featured-v8">Explore V8 blocks</Link>
-            <Link className="button button-secondary" href="/products#catalog">View full catalog</Link>
+            <a className="button button-primary" href="#featured-v8">Explore V8 blocks</a>
+            <a className="button button-secondary" href="/products#catalog">View full catalog</a>
           </div>
         </div>
         <div className="home-hero-product" aria-label="Featured LS3 aluminum V8 cylinder block">

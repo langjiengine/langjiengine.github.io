@@ -72,8 +72,8 @@ export function EmailDialog({ open, onClose, subject = "LANGII product inquiry",
   return (
     <div className="email-dialog-backdrop">
       <section className="email-dialog" role="dialog" aria-modal="true" aria-labelledby="email-dialog-title">
-        <button ref={closeButtonRef} className="email-dialog-close" type="button" onClick={onClose}>
-          <span>Close</span><span aria-hidden="true">×</span>
+        <button ref={closeButtonRef} className="email-dialog-close" type="button" aria-label="Close email options" onClick={onClose}>
+          <span aria-hidden="true">×</span>
         </button>
         <p className="eyebrow">Email LANGII sales</p>
         <h2 id="email-dialog-title">Choose how to send your inquiry.</h2>

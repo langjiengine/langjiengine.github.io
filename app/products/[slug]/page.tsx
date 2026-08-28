@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-html-link-for-pages -- native navigation keeps hash targets reliable on static hosting */
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -68,7 +69,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
     <main>
       <SiteHeader />
       <nav className="breadcrumbs" aria-label="Breadcrumb">
-        <Link href="/">Home</Link><span>/</span><Link href="/products#catalog">Products</Link><span>/</span><span>{product.family}</span>
+        <Link href="/">Home</Link><span>/</span><a href="/products#catalog">Products</a><span>/</span><span>{product.family}</span>
       </nav>
 
       <section className="product-detail">
@@ -92,8 +93,8 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
           </dl>
 
           <div className="detail-actions">
-            <Link className="button button-primary" href={`/request-a-quote?product=${encodeURIComponent(product.name)}#inquiry-form`}>Prepare inquiry</Link>
-            <Link className="button button-secondary" href="/products#catalog">Back to catalog</Link>
+            <a className="button button-primary" href={`/request-a-quote?product=${encodeURIComponent(product.name)}#inquiry-form`}>Prepare inquiry</a>
+            <a className="button button-secondary" href="/products#catalog">Back to catalog</a>
           </div>
         </div>
       </section>
@@ -109,7 +110,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
 
       {related.length > 0 && (
         <section className="related-section">
-          <div className="section-kicker"><p className="eyebrow">Related products</p><Link href="/products#catalog">View catalog →</Link></div>
+          <div className="section-kicker"><p className="eyebrow">Related products</p><a href="/products#catalog">View catalog →</a></div>
           <div className="product-grid related-grid">
             {related.map((item) => <ProductCard key={item.slug} product={item} />)}
           </div>

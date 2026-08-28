@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+/* eslint-disable @next/next/no-html-link-for-pages -- native navigation keeps hash targets reliable on static hosting */
 import Link from "next/link";
 
 export function SiteHeader() {
@@ -12,12 +13,12 @@ export function SiteHeader() {
         </span>
       </Link>
       <nav aria-label="Primary navigation">
-        <Link href="/products#catalog">Products</Link>
-        <Link href="/products#featured-v8">V8 range</Link>
-        <Link href="/#manufacturing">Manufacturing</Link>
-        <Link href="/request-a-quote#inquiry-form">Inquiry</Link>
+        <a href="/products#catalog">Products</a>
+        <a href="/products#featured-v8">V8 range</a>
+        <a href="/#manufacturing">Manufacturing</a>
+        <a href="/request-a-quote#inquiry-form">Inquiry</a>
       </nav>
-      <Link className="header-cta" href="/request-a-quote#inquiry-form">Prepare inquiry</Link>
+      <a className="header-cta" href="/request-a-quote#inquiry-form">Prepare inquiry</a>
     </header>
   );
 }
