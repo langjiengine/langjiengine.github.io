@@ -1,10 +1,22 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useSyncExternalStore } from "react";
 import { LANGII_CONTACT } from "../data/contact";
+
+function subscribeToLocation(callback: () => void) {
+  window.addEventListener("popstate", callback);
+  return () => window.removeEventListener("popstate", callback);
+}
+
+function getProductFromLocation() {
+  return new URLSearchParams(window.location.search).get("product") ?? "";
+}
 
 export function QuoteForm({ initialProduct = "" }: { initialProduct?: string }) {
   const [notice, setNotice] = useState("");
+  const queryProduct = useSyncExternalStore(subscribeToLocation, getProductFromLocation, () => "");
+  const [editedProduct, setEditedProduct] = useState<string | null>(null);
+  const product = editedProduct ?? (initialProduct || queryProduct);
 
   async function submitQuote(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -43,7 +55,7 @@ export function QuoteForm({ initialProduct = "" }: { initialProduct?: string }) 
         <label><span>Your name *</span><input name="name" required autoComplete="name" /></label>
         <label><span>Business email *</span><input type="email" name="email" required autoComplete="email" /></label>
         <label><span>Delivery country / region *</span><input name="country" required autoComplete="country-name" placeholder="Country or region" /></label>
-        <label className="form-span-2"><span>Product or engine family *</span><input name="product" required defaultValue={initialProduct} placeholder="Example: GM 454, 4.496 in" /></label>
+        <label className="form-span-2"><span>Product or engine family *</span><input name="product" required value={product} onChange={(event) => setEditedProduct(event.target.value)} placeholder="Example: GM 454, 4.496 in" /></label>
         <label><span>Reference / casting number</span><input name="reference" placeholder="If available" /></label>
         <label><span>Quantity *</span><input name="quantity" type="number" min="1" required defaultValue="1" /></label>
         <label className="form-span-2"><span>Application and specification *</span><textarea name="details" required rows={6} placeholder="Vehicle or equipment, bore, machining state, material, inspection, delivery postcode, and any other requirements." /></label>

@@ -9,10 +9,7 @@ export const metadata: Metadata = {
   description: "Send product, part-number, quantity, and application details to request LANGII pricing and specification confirmation.",
 };
 
-type QuotePageProps = { searchParams: Promise<{ product?: string }> };
-
-export default async function QuotePage({ searchParams }: QuotePageProps) {
-  const { product = "" } = await searchParams;
+export default function QuotePage() {
   return (
     <main>
       <SiteHeader />
@@ -40,7 +37,7 @@ export default async function QuotePage({ searchParams }: QuotePageProps) {
         </div>
         <div className="quote-form-shell">
           <h2>Inquiry details</h2>
-          <QuoteForm initialProduct={product} />
+          <QuoteForm />
         </div>
       </section>
       <SiteFooter />

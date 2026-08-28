@@ -29,6 +29,16 @@ npm run build
 node --test tests/rendered-html.test.mjs
 ```
 
+## Publish to GitHub Pages
+
+The repository includes an automated GitHub Pages workflow for the root site at `https://langjiengine.github.io`.
+
+```bash
+npm run build:pages
+```
+
+This creates a fully static catalog in `dist/client`, including all product-detail pages, `robots.txt`, and `sitemap.xml`. A push to the `main` branch runs the same build and publishes the result through GitHub Actions.
+
 ## Implemented
 
 - Minimal LANGII visual identity and buyer-focused English copy
@@ -76,7 +86,8 @@ node --test tests/rendered-html.test.mjs
 
 - Vinext / React / TypeScript
 - Data-first static product records
-- Cloudflare-compatible runtime for the current first version
-- Portable content and images for later migration to GitHub Pages, another static host, or the final custom domain
+- Cloudflare-compatible runtime for the existing hosted version
+- Automated static export and deployment for `https://langjiengine.github.io`
+- Portable content and images for later migration to the final custom domain
 
 The current detailed roadmap is in `outputs/README_LANGII_Technical_Roadmap_v2.md`.
