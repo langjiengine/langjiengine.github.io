@@ -50,7 +50,7 @@ test("renders the inquiry route with the selected product", async () => {
   assert.equal(response.status, 200);
   const html = await response.text();
   assert.match(html, /Inquiry details/i);
-  assert.match(html, /Copy inquiry brief/i);
+  assert.match(html, /Open email application/i);
   assert.match(html, /LS3 Aluminum 6\.2L/i);
   assert.match(html, /Delivery country \/ region/i);
   assert.doesNotMatch(html, /sales@langii\.example|intentional placeholder|sales contact pending/i);

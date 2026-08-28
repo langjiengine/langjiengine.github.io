@@ -20,6 +20,7 @@ export function QuoteForm({ initialProduct = "" }: { initialProduct?: string }) 
     ];
     const body = fields.map(([label, value]) => `${label}: ${value || "Not supplied"}`).join("\n");
     const brief = `LANGII product inquiry\n\n${body}`;
+    const subject = `LANGII product inquiry — ${data.get("product") || "engine component"}`;
     try {
       await navigator.clipboard.writeText(brief);
     } catch {
@@ -30,7 +31,8 @@ export function QuoteForm({ initialProduct = "" }: { initialProduct?: string }) 
       document.execCommand("copy");
       textArea.remove();
     }
-    setNotice("Inquiry brief copied. Paste it into email or WhatsApp when contacting your LANGII representative.");
+    setNotice("Inquiry brief copied. Your email application is opening with the subject and message filled in.");
+    window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(brief)}`;
   }
 
   return (
@@ -46,8 +48,8 @@ export function QuoteForm({ initialProduct = "" }: { initialProduct?: string }) 
         <label className="form-span-2"><span>Application and specification *</span><textarea name="details" required rows={6} placeholder="Vehicle or equipment, bore, machining state, material, inspection, delivery postcode, and any other requirements." /></label>
       </div>
       <div className="form-submit-row">
-        <button className="button button-primary" type="submit">Copy inquiry brief</button>
-        <small>This tool formats the details locally in your browser and copies them to your clipboard.</small>
+        <button className="button button-primary" type="submit">Open email application</button>
+        <small>The inquiry is copied as a backup, then opened in your email application. Choose your LANGII contact before sending.</small>
       </div>
       {notice && <p className="form-notice" role="status">{notice}</p>}
     </form>

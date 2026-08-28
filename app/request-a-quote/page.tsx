@@ -25,7 +25,7 @@ export default async function QuotePage({ searchParams }: QuotePageProps) {
             <div><dt>02</dt><dd>Part or casting number</dd></div>
             <div><dt>03</dt><dd>Quantity and machining requirements</dd></div>
           </dl>
-          <p className="inquiry-helper">The form creates a copy-ready inquiry brief in your browser. No information is stored or sent by this website.</p>
+          <p className="inquiry-helper">The form prepares the inquiry locally, copies a backup and opens your email application. No information is stored by this website.</p>
         </div>
         <div className="quote-form-shell">
           <h2>Inquiry details</h2>
