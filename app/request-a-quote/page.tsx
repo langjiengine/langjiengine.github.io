@@ -36,7 +36,7 @@ export default function QuotePage() {
             </a>
           </div>
         </div>
-        <div className="quote-form-shell">
+        <div className="quote-form-shell" id="inquiry-form">
           <h2>Inquiry details</h2>
           <QuoteForm />
         </div>

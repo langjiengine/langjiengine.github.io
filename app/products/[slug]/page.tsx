@@ -68,7 +68,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
     <main>
       <SiteHeader />
       <nav className="breadcrumbs" aria-label="Breadcrumb">
-        <Link href="/">Home</Link><span>/</span><Link href="/products">Products</Link><span>/</span><span>{product.family}</span>
+        <Link href="/">Home</Link><span>/</span><Link href="/products#catalog">Products</Link><span>/</span><span>{product.family}</span>
       </nav>
 
       <section className="product-detail">
@@ -92,8 +92,8 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
           </dl>
 
           <div className="detail-actions">
-            <Link className="button button-primary" href={`/request-a-quote?product=${encodeURIComponent(product.name)}`}>Prepare inquiry</Link>
-            <Link className="button button-secondary" href="/products">Back to catalog</Link>
+            <Link className="button button-primary" href={`/request-a-quote?product=${encodeURIComponent(product.name)}#inquiry-form`}>Prepare inquiry</Link>
+            <Link className="button button-secondary" href="/products#catalog">Back to catalog</Link>
           </div>
         </div>
       </section>
@@ -109,7 +109,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
 
       {related.length > 0 && (
         <section className="related-section">
-          <div className="section-kicker"><p className="eyebrow">Related products</p><Link href="/products">View catalog →</Link></div>
+          <div className="section-kicker"><p className="eyebrow">Related products</p><Link href="/products#catalog">View catalog →</Link></div>
           <div className="product-grid related-grid">
             {related.map((item) => <ProductCard key={item.slug} product={item} />)}
           </div>

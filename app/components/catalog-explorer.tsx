@@ -49,7 +49,7 @@ export function CatalogExplorer() {
   }
 
   return (
-    <section className="catalog-shell" aria-label="Product catalog">
+    <section className="catalog-shell" id="catalog" aria-label="Product catalog">
       <aside className="catalog-sidebar">
         <div className="sidebar-heading">
           <span>Browse products</span>

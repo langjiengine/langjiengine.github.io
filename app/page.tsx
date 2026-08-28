@@ -15,7 +15,7 @@ export default function Home() {
           <p>LANGII presents V8 and heavy-duty engine components for professional sourcing. Compare engine family, reference numbers and technical details before preparing an inquiry.</p>
           <div className="hero-actions">
             <Link className="button button-primary" href="#featured-v8">Explore V8 blocks</Link>
-            <Link className="button button-secondary" href="/products">View full catalog</Link>
+            <Link className="button button-secondary" href="/products#catalog">View full catalog</Link>
           </div>
         </div>
         <div className="home-hero-product" aria-label="Featured LS3 aluminum V8 cylinder block">

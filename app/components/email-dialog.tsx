@@ -72,7 +72,9 @@ export function EmailDialog({ open, onClose, subject = "LANGII product inquiry",
   return (
     <div className="email-dialog-backdrop">
       <section className="email-dialog" role="dialog" aria-modal="true" aria-labelledby="email-dialog-title">
-        <button ref={closeButtonRef} className="email-dialog-close" type="button" onClick={onClose} aria-label="Close email options">×</button>
+        <button ref={closeButtonRef} className="email-dialog-close" type="button" onClick={onClose}>
+          <span>Close</span><span aria-hidden="true">×</span>
+        </button>
         <p className="eyebrow">Email LANGII sales</p>
         <h2 id="email-dialog-title">Choose how to send your inquiry.</h2>
         <p className="email-dialog-intro">Use a web inbox, copy the sales address, or open the email application configured on your device.</p>
@@ -87,6 +89,7 @@ export function EmailDialog({ open, onClose, subject = "LANGII product inquiry",
           <a className="button button-primary" href={gmailUrl} target="_blank" rel="noreferrer">Open Gmail</a>
           <a className="button button-secondary" href={outlookUrl} target="_blank" rel="noreferrer">Open Outlook</a>
           <a className="email-app-link" href={mailtoUrl}>Use email application</a>
+          <button className="email-dialog-dismiss" type="button" onClick={onClose}>Close window</button>
         </div>
 
         {inquiryCopied && <p className="email-dialog-note">Your completed inquiry has also been copied, ready to paste if your email service does not prefill it.</p>}

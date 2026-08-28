@@ -171,6 +171,7 @@ button { color: inherit; }
   border-bottom: 1px solid var(--line);
   display: grid;
   grid-template-columns: 260px minmax(0, 1fr);
+  scroll-margin-top: 78px;
 }
 .catalog-sidebar { border-right: 1px solid var(--line); padding: 2rem 1.25rem 4rem 4vw; }
 .catalog-sidebar > * { position: sticky; top: 98px; }
@@ -369,7 +370,7 @@ button { color: inherit; }
 .direct-contacts a:hover strong, .direct-contact-email:hover strong { color: #f0c66a; }
 .direct-contacts span { color: #929891; font-size: .58rem; font-weight: 900; letter-spacing: .09em; text-transform: uppercase; }
 .direct-contacts strong { color: white; font-size: .82rem; overflow-wrap: anywhere; }
-.quote-form-shell { padding: 6vw 4vw; }
+.quote-form-shell { padding: 6vw 4vw; scroll-margin-top: 78px; }
 .quote-form-shell h2 { font-size: 2rem; margin: 0 0 1.7rem; }
 .form-grid { display: grid; gap: 1rem; grid-template-columns: 1fr 1fr; }
 .quote-form textarea { line-height: 1.5; resize: vertical; }
@@ -404,7 +405,8 @@ button { color: inherit; }
 .email-dialog .eyebrow { margin-bottom: .75rem; }
 .email-dialog h2 { font-size: clamp(1.8rem, 4vw, 2.7rem); letter-spacing: -.045em; line-height: 1; margin: 0; max-width: 26rem; }
 .email-dialog-intro { color: var(--muted); font-size: .86rem; line-height: 1.65; margin: 1rem 0 1.4rem; }
-.email-dialog-close { background: transparent; border: 0; cursor: pointer; font-size: 1.8rem; line-height: 1; padding: .2rem .45rem; position: absolute; right: 1rem; top: 1rem; }
+.email-dialog-close { align-items: center; background: white; border: 1px solid var(--ink); cursor: pointer; display: inline-flex; font-size: .62rem; font-weight: 900; gap: .45rem; letter-spacing: .08em; padding: .48rem .65rem; position: absolute; right: 1rem; text-transform: uppercase; top: 1rem; }
+.email-dialog-close span:last-child { font-size: 1rem; line-height: .7; }
 .email-address-card { background: var(--surface); border: 1px solid var(--line); display: grid; gap: .45rem; padding: 1.1rem; }
 .email-address-card span { color: var(--muted); font-size: .58rem; font-weight: 900; letter-spacing: .09em; text-transform: uppercase; }
 .email-address-card strong { font-size: 1.05rem; overflow-wrap: anywhere; }
@@ -412,6 +414,7 @@ button { color: inherit; }
 .email-dialog-actions { display: grid; gap: .65rem; grid-template-columns: 1fr 1fr; margin-top: 1rem; }
 .email-dialog-actions .button { width: 100%; }
 .email-app-link { color: var(--muted); font-size: .69rem; font-weight: 900; grid-column: 1 / -1; justify-self: center; letter-spacing: .06em; padding: .55rem; text-decoration: underline; text-underline-offset: .2rem; text-transform: uppercase; }
+.email-dialog-dismiss { background: var(--surface); border: 1px solid var(--line); cursor: pointer; font-size: .65rem; font-weight: 900; grid-column: 1 / -1; letter-spacing: .07em; min-height: 42px; text-transform: uppercase; }
 .email-dialog-note { background: #e7f0e6; border-left: 3px solid #4c7a49; color: #31582f; font-size: .75rem; line-height: 1.55; margin: 1rem 0 0; padding: .85rem; }
 
 footer { align-items: start; background: var(--ink); color: white; display: grid; gap: 2rem; grid-template-columns: 1fr 1.2fr 1fr; padding: 3rem 4vw; }

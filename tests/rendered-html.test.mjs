@@ -53,6 +53,8 @@ test("renders the inquiry route with the selected product", async () => {
   assert.match(html, /Inquiry details/i);
   assert.match(html, /Continue to email options/i);
   assert.match(html, /Gmail, Outlook or your email application/i);
+  assert.match(html, /id="inquiry-form"/i);
+  assert.match(html, /href="\/request-a-quote#inquiry-form"/i);
   assert.match(html, /LS3 Aluminum 6\.2L/i);
   assert.match(html, /Delivery country \/ region/i);
   assert.match(html, /jane@langjitech\.com/i);

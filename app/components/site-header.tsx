@@ -12,12 +12,12 @@ export function SiteHeader() {
         </span>
       </Link>
       <nav aria-label="Primary navigation">
-        <Link href="/products">Products</Link>
+        <Link href="/products#catalog">Products</Link>
         <Link href="/products#featured-v8">V8 range</Link>
         <Link href="/#manufacturing">Manufacturing</Link>
-        <Link href="/request-a-quote">Inquiry</Link>
+        <Link href="/request-a-quote#inquiry-form">Inquiry</Link>
       </nav>
-      <Link className="header-cta" href="/request-a-quote">Prepare inquiry</Link>
+      <Link className="header-cta" href="/request-a-quote#inquiry-form">Prepare inquiry</Link>
     </header>
   );
 }
