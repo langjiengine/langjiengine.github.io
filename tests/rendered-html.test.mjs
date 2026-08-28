@@ -51,7 +51,8 @@ test("renders the inquiry route with the selected product", async () => {
   assert.equal(response.status, 200);
   const html = await response.text();
   assert.match(html, /Inquiry details/i);
-  assert.match(html, /Open email application/i);
+  assert.match(html, /Continue to email options/i);
+  assert.match(html, /Gmail, Outlook or your email application/i);
   assert.match(html, /LS3 Aluminum 6\.2L/i);
   assert.match(html, /Delivery country \/ region/i);
   assert.match(html, /jane@langjitech\.com/i);

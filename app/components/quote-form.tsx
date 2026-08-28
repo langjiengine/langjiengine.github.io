@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useState, useSyncExternalStore } from "react";
-import { LANGII_CONTACT } from "../data/contact";
+import { EmailDialog } from "./email-dialog";
 
 function subscribeToLocation(callback: () => void) {
   window.addEventListener("popstate", callback);
@@ -14,6 +14,7 @@ function getProductFromLocation() {
 
 export function QuoteForm({ initialProduct = "" }: { initialProduct?: string }) {
   const [notice, setNotice] = useState("");
+  const [emailDraft, setEmailDraft] = useState<{ subject: string; body: string } | null>(null);
   const queryProduct = useSyncExternalStore(subscribeToLocation, getProductFromLocation, () => "");
   const [editedProduct, setEditedProduct] = useState<string | null>(null);
   const product = editedProduct ?? (initialProduct || queryProduct);
@@ -44,8 +45,8 @@ export function QuoteForm({ initialProduct = "" }: { initialProduct?: string }) 
       document.execCommand("copy");
       textArea.remove();
     }
-    setNotice(`Inquiry brief copied. Your email application is opening a message to ${LANGII_CONTACT.email}.`);
-    window.location.href = `mailto:${LANGII_CONTACT.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(brief)}`;
+    setNotice("Inquiry brief copied. Choose Gmail, Outlook or your email application in the contact window.");
+    setEmailDraft({ subject, body: brief });
   }
 
   return (
@@ -61,10 +62,17 @@ export function QuoteForm({ initialProduct = "" }: { initialProduct?: string }) 
         <label className="form-span-2"><span>Application and specification *</span><textarea name="details" required rows={6} placeholder="Vehicle or equipment, bore, machining state, material, inspection, delivery postcode, and any other requirements." /></label>
       </div>
       <div className="form-submit-row">
-        <button className="button button-primary" type="submit">Open email application</button>
-        <small>The inquiry is copied as a backup, then opened in your email application addressed to LANGII sales.</small>
+        <button className="button button-primary" type="submit">Continue to email options</button>
+        <small>The inquiry is copied as a backup, then you can choose Gmail, Outlook or your configured email application.</small>
       </div>
       {notice && <p className="form-notice" role="status">{notice}</p>}
+      <EmailDialog
+        open={emailDraft !== null}
+        onClose={() => setEmailDraft(null)}
+        subject={emailDraft?.subject}
+        body={emailDraft?.body}
+        inquiryCopied
+      />
     </form>
   );
 }

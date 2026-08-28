@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { QuoteForm } from "../components/quote-form";
+import { EmailDialogTrigger } from "../components/email-dialog";
 import { SiteFooter } from "../components/site-footer";
 import { SiteHeader } from "../components/site-header";
 import { LANGII_CONTACT } from "../data/contact";
@@ -23,12 +24,12 @@ export default function QuotePage() {
             <div><dt>02</dt><dd>Part or casting number</dd></div>
             <div><dt>03</dt><dd>Quantity and machining requirements</dd></div>
           </dl>
-          <p className="inquiry-helper">The form prepares the inquiry locally, copies a backup and opens your email application. No information is stored by this website.</p>
+          <p className="inquiry-helper">The form prepares the inquiry locally, copies a backup and lets you choose Gmail, Outlook or your email application. No information is stored by this website.</p>
           <div className="direct-contacts" aria-label="Direct contact options">
-            <a href={`mailto:${LANGII_CONTACT.email}`}>
+            <EmailDialogTrigger className="direct-contact-email">
               <span>Email</span>
               <strong>{LANGII_CONTACT.email}</strong>
-            </a>
+            </EmailDialogTrigger>
             <a href={LANGII_CONTACT.whatsappUrl} target="_blank" rel="noreferrer">
               <span>WhatsApp / WeChat</span>
               <strong>{LANGII_CONTACT.phoneDisplay}</strong>
