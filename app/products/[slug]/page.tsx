@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   if (!product) return { title: "Product Not Found | LANGII" };
   const title = `${product.name} | LANGII`;
   const productUrl = `${siteOrigin}/products/${product.slug}`;
-  const imageUrl = `${siteOrigin}${product.images[0] ?? "/og.png"}`;
+  const imageUrl = `${siteOrigin}${product.cardImage ?? product.images[0] ?? "/og-v2.png"}`;
 
   return {
     title,
@@ -72,7 +72,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
       </nav>
 
       <section className="product-detail">
-        <ProductGallery images={product.images} name={product.name} />
+        <ProductGallery images={product.images} name={product.name} cardImage={product.cardImage} rotateSource={product.category === "Featured V8 Blocks"} />
         <div className="product-detail-copy">
           <p className="eyebrow">{product.category} · {product.id}</p>
           <h1>{product.name}</h1>
@@ -80,7 +80,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
           <div className="price-line"><span>Pricing</span><strong>{product.priceLabel}</strong></div>
 
           {product.status === "needs-confirmation" && (
-            <p className="verification-note"><strong>Confirmation required:</strong> review the noted source fields and verify final fitment before ordering.</p>
+            <p className="verification-note"><strong>Fitment matching:</strong> quote against the engine family, casting or reference number and required machining state.</p>
           )}
 
           <dl className="spec-table">
@@ -91,10 +91,8 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
             ))}
           </dl>
 
-          {product.sourceNote && <p className="source-note">{product.sourceNote}</p>}
-
           <div className="detail-actions">
-            <Link className="button button-primary" href={`/request-a-quote?product=${encodeURIComponent(product.name)}`}>Request pricing</Link>
+            <Link className="button button-primary" href={`/request-a-quote?product=${encodeURIComponent(product.name)}`}>Prepare inquiry</Link>
             <Link className="button button-secondary" href="/products">Back to catalog</Link>
           </div>
         </div>

@@ -5,7 +5,7 @@ import { FormEvent, useState } from "react";
 export function QuoteForm({ initialProduct = "" }: { initialProduct?: string }) {
   const [notice, setNotice] = useState("");
 
-  function submitQuote(event: FormEvent<HTMLFormElement>) {
+  async function submitQuote(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const fields = [
@@ -19,9 +19,18 @@ export function QuoteForm({ initialProduct = "" }: { initialProduct?: string }) 
       ["Application and specification", data.get("details")],
     ];
     const body = fields.map(([label, value]) => `${label}: ${value || "Not supplied"}`).join("\n");
-    const subject = `Engine component inquiry — ${data.get("product") || "specification request"}`;
-    setNotice("Your email application is opening with the request details. The recipient address is a placeholder until LANGII confirms its public sales contact.");
-    window.location.href = `mailto:sales@langii.example?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const brief = `LANGII product inquiry\n\n${body}`;
+    try {
+      await navigator.clipboard.writeText(brief);
+    } catch {
+      const textArea = document.createElement("textarea");
+      textArea.value = brief;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand("copy");
+      textArea.remove();
+    }
+    setNotice("Inquiry brief copied. Paste it into email or WhatsApp when contacting your LANGII representative.");
   }
 
   return (
@@ -37,8 +46,8 @@ export function QuoteForm({ initialProduct = "" }: { initialProduct?: string }) 
         <label className="form-span-2"><span>Application and specification *</span><textarea name="details" required rows={6} placeholder="Vehicle or equipment, bore, machining state, material, inspection, delivery postcode, and any other requirements." /></label>
       </div>
       <div className="form-submit-row">
-        <button className="button button-primary" type="submit">Prepare email request</button>
-        <small>This MVP prepares an email locally; it does not store or transmit form data to a server.</small>
+        <button className="button button-primary" type="submit">Copy inquiry brief</button>
+        <small>This tool formats the details locally in your browser and copies them to your clipboard.</small>
       </div>
       {notice && <p className="form-notice" role="status">{notice}</p>}
     </form>

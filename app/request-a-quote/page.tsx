@@ -18,14 +18,14 @@ export default async function QuotePage({ searchParams }: QuotePageProps) {
       <section className="quote-page-grid">
         <div className="quote-page-intro">
           <p className="eyebrow">Product inquiry</p>
-          <h1>Send the details buyers rely on.</h1>
-          <p>Provide enough information to identify the correct component and reduce follow-up questions.</p>
+          <h1>Prepare a complete product inquiry.</h1>
+          <p>Build a concise sourcing brief with the information needed to identify the component and quote the correct configuration.</p>
           <dl>
             <div><dt>01</dt><dd>Engine family and application</dd></div>
             <div><dt>02</dt><dd>Part or casting number</dd></div>
             <div><dt>03</dt><dd>Quantity and machining requirements</dd></div>
           </dl>
-          <div className="placeholder-alert"><strong>Sales contact pending</strong><p><code>sales@langii.example</code> is an intentional placeholder. Replace it before public launch.</p></div>
+          <p className="inquiry-helper">The form creates a copy-ready inquiry brief in your browser. No information is stored or sent by this website.</p>
         </div>
         <div className="quote-form-shell">
           <h2>Inquiry details</h2>

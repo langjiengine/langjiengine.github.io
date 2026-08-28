@@ -18,12 +18,12 @@ test("server-renders the English LANGII catalog", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
   const html = await response.text();
   assert.match(html, /<html lang="en"/i);
-  assert.match(html, /LANGII engine components/i);
+  assert.match(html, /Engine components,.*clearly specified/i);
   assert.match(html, /71(?:<!-- -->)? records/i);
   assert.match(html, /Featured V8 Blocks/i);
   assert.match(html, /Cylinder Head Assemblies/i);
   assert.match(html, /LS3 Aluminum 6\.2L V8 Cylinder Block/i);
-  assert.match(html, /og-v2\.png/i);
+  assert.match(html, /og-v3\.png/i);
   assert.doesNotMatch(html, /target markets?|United States|Australia|sign.?in.?with.?chatgpt/i);
 });
 
@@ -39,7 +39,7 @@ for (const [slug, title, detail] of [
     const html = await response.text();
     assert.match(html, new RegExp(title.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
     assert.match(html, new RegExp(detail.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
-    assert.match(html, /Request pricing/i);
+    assert.match(html, /Prepare inquiry/i);
     assert.match(html, /application\/ld\+json/i);
     assert.doesNotMatch(html, /target markets?|United States|Australia/i);
   });
@@ -50,8 +50,9 @@ test("renders the inquiry route with the selected product", async () => {
   assert.equal(response.status, 200);
   const html = await response.text();
   assert.match(html, /Inquiry details/i);
-  assert.match(html, /sales@langii\.example/i);
+  assert.match(html, /Copy inquiry brief/i);
   assert.match(html, /LS3 Aluminum 6\.2L/i);
   assert.match(html, /Delivery country \/ region/i);
+  assert.doesNotMatch(html, /sales@langii\.example|intentional placeholder|sales contact pending/i);
   assert.doesNotMatch(html, /Select market|United States|Australia/i);
 });

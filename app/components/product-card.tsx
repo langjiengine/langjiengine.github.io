@@ -5,10 +5,11 @@ import type { CatalogProduct } from "../data/products";
 export function ProductCard({ product }: { product: CatalogProduct }) {
   const image = product.cardImage ?? product.images[0];
   const firstReference = product.partNumbers[0] ?? product.id;
+  const rotateSource = product.category === "Featured V8 Blocks" && !product.cardImage;
 
   return (
     <article className="product-card">
-      <Link className={`product-image${product.cardImage ? " product-image-cutout" : ""}`} href={`/products/${product.slug}`}>
+      <Link className={`product-image${product.cardImage ? " product-image-cutout" : ""}${rotateSource ? " product-image-rotated" : ""}`} href={`/products/${product.slug}`}>
         {image ? (
           <img src={image} alt={`${product.name} product view`} />
         ) : (

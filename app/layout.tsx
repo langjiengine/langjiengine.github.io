@@ -10,19 +10,19 @@ export const metadata: Metadata = {
   title,
   description,
   applicationName: "LANGII",
-  icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
+  icons: { icon: "/brand/langii-lt-mark-v2.png", shortcut: "/brand/langii-lt-mark-v2.png" },
   openGraph: {
     title,
     description,
     type: "website",
     url: siteOrigin,
-    images: [{ url: `${siteOrigin}/og-v2.png`, width: 1536, height: 1024, alt: "LANGII engine components" }],
+    images: [{ url: `${siteOrigin}/og-v3.png`, width: 1536, height: 1024, alt: "LANGII engine components" }],
   },
   twitter: {
     card: "summary_large_image",
     title,
     description,
-    images: [`${siteOrigin}/og-v2.png`],
+    images: [`${siteOrigin}/og-v3.png`],
   },
 };
 

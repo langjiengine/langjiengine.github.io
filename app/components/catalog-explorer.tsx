@@ -122,7 +122,7 @@ export function CatalogExplorer() {
                 <p className="eyebrow">Other components</p>
                 <h2>Heads, blocks &amp; crankshafts</h2>
               </div>
-              <p>Every supplied catalog record has its own page, part-number field, source dimensions, and inquiry link.</p>
+              <p>Every catalog record opens to a dedicated page with its available application, family and reference information.</p>
             </div>
             <div className="product-grid catalog-product-grid support-product-grid">
               {filteredSupport.map((product) => <ProductCard product={product} key={product.slug} />)}

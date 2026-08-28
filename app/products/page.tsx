@@ -18,13 +18,13 @@ export default function ProductsPage() {
           <h1>Engine components.<br /><em>Clearly specified.</em></h1>
         </div>
         <div className="catalog-hero-copy">
-          <p>Use the left-side categories to narrow the catalog, or search by engine family and part number. Each card opens a maintained specification page.</p>
+          <p>Use the left-side categories to narrow the catalog, or search by engine family and part number. Every card opens a dedicated specification page.</p>
         </div>
       </section>
       <CatalogExplorer />
       <section className="catalog-disclaimer">
-        <strong>Specification notice</strong>
-        <p>Source labels are retained for traceability. Final fitment, material, machining state, package dimensions, availability, and compatible part numbers must be confirmed before ordering.</p>
+        <strong>Ordering note</strong>
+        <p>Confirm final fitment, material, machining state, availability and compatible part numbers against the engine family and casting or reference number.</p>
       </section>
       <SiteFooter />
     </main>
